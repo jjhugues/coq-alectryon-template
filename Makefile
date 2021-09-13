@@ -4,6 +4,7 @@ all:
 
 generate_doc:
 	cp theories/*.v docs
+	make -C docs html
 
 distclean:
 	-rm -rf coq_makefile*

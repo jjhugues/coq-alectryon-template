@@ -42,43 +42,10 @@ Fixpoint even (n: nat): bool :=
 Arguments even : simpl nomatch.
 
 (*|
-Can we prove it correct?
-.. coq:: unfold
-|*)
-
-Lemma even_Even :
-  forall n, even n = true <-> Even n. (* .fold *)
-Proof. (* .fold *)
-  induction n.
-  all: cbn.
-  - (* n ← 0 *)
-    split.
-    all: constructor.
-  - (* n ← S _ *)
-    Fail apply IHn. (* .fails .no-goals *) (* stuck! *)
-
-(*|
-The induction hypothesis doesn't apply — maybe we need to destruct ``n``?
-
-.. coq:: unfold
-|*)
-
-    destruct n.
-    + (* n ← 1 *)
-      split; inversion 1.
-    + (* n ← S (S _) *)
-
-(*|
-Stuck again!
-|*)
-
-Abort.
-
-(*|
 Strengthening the spec
 ======================
 The usual approach is to strengthen the spec to work around the weakness of the inductive principle.
-.. coq:: unfold
+.. coq:: no-hyps no-goals unfold
 |*)
 
 Lemma even_Even :
@@ -95,25 +62,4 @@ Proof. (* .fold *)
     repeat split; cbn.
     all: eauto using EvenS.
     inversion 1; eauto.
-Qed.
-
-(*|
-Writing a fixpoint
-==================
-But writing a fixpoint (either with the :coq:`Fixpoint` command or with the `fix` tactic) is much nicer:
-.. coq:: unfold
-|*)
-
-Fixpoint even_Even_fp (n: nat):
-  even n = true <-> Even n. (* .fold *)
-Proof. (* .fold *)
-  destruct n as [ | [ | n ] ]; cbn.
-  - (* n ← 0 *)
-    repeat constructor.
-  - (* n ← 1 *)
-    split; inversion 1.
-  - (* n ← S (S _) *)
-    split.
-    + constructor; apply even_Even_fp; assumption.
-    + inversion 1; apply even_Even_fp; assumption.
 Qed.
