@@ -13,6 +13,6 @@ the following requirements:
   annotations.
 
 Then
-- `make generate_doc` invokes alectryon to produce `.rst` files
+- `make generate_doc` copies Coq files to `docs`  (*TO BE RENAMED*)
 - `make -C docs html` generates HTML files using Sphinx, the result is in `docs/_build/html`
 - `make -C docs latexpdf` generates a PDF using Sphinx, the result is in `docs/_build/latex/coq-alectryon-template.pdf`

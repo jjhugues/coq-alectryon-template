@@ -10,11 +10,13 @@ coq-alectryon-template
    :maxdepth: 2
    :caption: Contents:
 
+   hello
+
 This is a minimal project to illustrate how to generate
 documentation from Coq code using Alectryon
 
 
-.. include:: hello.v.rst
+
 
 
 Indices and tables

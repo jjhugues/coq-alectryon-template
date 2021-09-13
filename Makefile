@@ -3,9 +3,7 @@ all:
 	make -f coq_makefile
 
 generate_doc:
-	alectryon  --no-header --frontend coq+rst --backend rst  \
-		-Q theories dummy theories/hello.v \
-		--copy-assets copy --output-dir docs
+	cp theories/*.v docs
 
 distclean:
 	-rm -rf coq_makefile*
