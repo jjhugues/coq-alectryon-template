@@ -14,6 +14,9 @@ example, written in Coq.
     :height: 100px
     :alt: alternate text
 
+.. math::
+   A^\alpha = \left({\phi\over c}, {\bf A}\right)
+
 .. coq:: none
 |*)
 
@@ -21,6 +24,12 @@ Require Import Arith.
 
 (*|
 Here's an *inductive specification* of evenness:
+
+.. index::
+   single: even
+
+.. coq::
+
 |*)
 
 Inductive Even : nat -> Prop :=
@@ -41,11 +50,15 @@ Fixpoint even (n: nat): bool :=
 (* Ensure that we never unfold [even (S n)] *)
 Arguments even : simpl nomatch.
 
+(* no-hyps no-goals unfold *)
+
 (*|
 Strengthening the spec
 ======================
 The usual approach is to strengthen the spec to work around the weakness of the inductive principle.
-.. coq:: no-hyps no-goals unfold
+no-hyps no-goals unfold
+
+.. coq::
 |*)
 
 Lemma even_Even :
@@ -63,3 +76,11 @@ Proof. (* .fold *)
     all: eauto using EvenS.
     inversion 1; eauto.
 Qed.
+
+(*|
+.. coq::
+   :class: coq-math-2
+|*)
+
+   Notation "\mathbb{B}" := bool.
+   Print bool. (* .unfold *)

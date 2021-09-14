@@ -28,7 +28,8 @@ author = 'J. Hugues'
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-    "alectryon.sphinx" # Added Alectryon
+    "alectryon.sphinx", # Added Alectryon
+    "sphinx.ext.mathjax"
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -51,3 +52,33 @@ html_theme = 'alabaster'
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
+
+# -- Alectryon configuration -------------------------------------------------
+
+import alectryon.docutils
+alectryon.docutils.CACHE_DIRECTORY = "_build/alectryon/"
+
+# -- MathJax configuration ---------------------------------------------------
+
+from sphinx.ext import mathjax
+mathjax.MATHJAX_URL = alectryon.docutils.HtmlTranslator.MATHJAX_URL # MathJax 3
+
+# This configuration is explained in recipes/mathjax.rst
+# Use either this (Sphinx ≥ 4.0 only):
+
+html_js_files = ['mathjax_config.js']
+mathjax_options = { "priority": 1000 }
+
+# or this (but inline the configuration instead of open(…).read()):
+
+from pathlib import Path
+html_js_files = [
+    (None, {
+        "body": Path("_static/mathjax_config.js").read_text(),
+        "priority": 0
+    })
+]
+
+# or this:
+
+html_js_files = [('mathjax_config.js', { "priority": 0 })]

@@ -6,22 +6,18 @@
 coq-alectryon-template
 ======================
 
-.. toctree::
-   :maxdepth: 2
-   :caption: Contents:
-
-   hello
-
 This is a minimal project to illustrate how to generate
 documentation from Coq code using Alectryon
 
+.. toctree::
+   :maxdepth: 2
+   :caption: Contents:
+   :numbered:
 
-
-
+   hello
 
 Indices and tables
 ==================
 
 * :ref:`genindex`
-* :ref:`modindex`
 * :ref:`search`
